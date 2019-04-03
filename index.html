@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="appCtrl">
+  <head>
+    <title>Dynamic Table</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table table-bordered mt-3">
+            <thead>
+              <th ng-repeat="(key, val) in tblRows[0]">
+                {{key}}
+              </th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="list in tblRows">
+                <td>
+                  {{list.id}}
+                </td>
+                <td>
+                  {{list.name}}
+                </td>
+                <td>
+                  {{list.email}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4">
+          <form name="dataForm" novalidate>
+            <div>Create Table</div>
+            <p class="mt-4">
+              <input name="id" type="number" placeholder="Enter Id" ng-model="id" required />
+              <span style="color:red" ng-show="dataForm.id.$dirty && dataForm.id.$error.required">Id is
+              required</span>
+            </p>
+            <p>
+              <input name="name" type="text" placeholder="Enter Name" ng-model="name" required />
+              <span style="color:red" ng-show="dataForm.name.$dirty && dataForm.name.$error.required">Name is
+              required</span>
+            </p>
+            <p>
+              <input name="email" type="email" placeholder="Enter Email" ng-model="email" required />
+              <span style="color:red" ng-show="dataForm.email.$dirty && dataForm.email.$error.required">Email
+              is required</span>
+            </p>
+            <div style="color:red">{{displayMsg}}</div>
+            <div class="row mt-5 float-right">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                  <input type="button" value="ADD" ng-click="addRow()" ng-disabled="dataForm.$invalid" />
+                  <input type="button" class="ml-2" value="DELETE" ng-click="deleteRow()"
+                    ng-disabled="tblRows.length==0" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
